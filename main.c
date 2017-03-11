@@ -12,70 +12,106 @@
 
 #include "fractol.h"
 
-/*
-**
-*/
-
-int		ColorHSV(int a, int b, int c)
+void	complex_plane(t_map *map, t_pt *pt)
 {
-
+	pt->real = (4 / (double)(map->width)) * (double)(pt->x - (map->width / 2));
+	pt->imaginary = (4 / (double)(map->width)) * (double)(pt->y - (map->height / 2));
 }
 
-/*
-**
-*/
-
-int		HSVtoRGB()
+int		expose_hook(t_map *map)
 {
-
+	mlx_clear_window(map->connection, map->window);
+	mlx_put_image_to_window(map->connection, map->window, map->image, 0, 0);
+	return (1);
 }
 
-int		main(void)
+void	error(char *message)
 {
-	t_map	**map;
+	ft_putstr(message);
+	exit(1);
+}
+
+void	mandelbrot_iteration(t_map *map, t_pt *pt)
+{
+	int		i;
 	double	c_real;
 	double	c_imaginary;
 	double	new_real;
 	double	new_imaginary;
 	double	old_real;
 	double	old_imaginary;
-	double	zoom = 1;
-	double	moveX = 0;
-	double	moveY = 0;
-	int		color;
-	int		maxIterations = 300;
-	int		x;
-	int		y;
-	int		i;
 
-	init_map(map, 1300, 1000, "Julia Set");
-	c_real = -0.7;
-	c_imaginary = 0.27015;
-	y = 0;
-	while (y < h)
+	c_real = (double)pt->real;
+	c_imaginary = (double)pt->imaginary;
+	new_real = 0;
+	new_imaginary = 0;
+	i = 0;
+	while (i < map->fractal->maxIterations)
 	{
-		x = 0;
-		while (x < w)
+		old_real = new_real;
+		old_imaginary = new_imaginary;
+		new_real = old_real * old_real - old_imaginary * old_imaginary + c_real;
+		new_imaginary = 2 * old_real * old_imaginary + c_imaginary;
+		if (new_real * new_real + new_imaginary * new_imaginary > 4)
 		{
-			new_real = 1.5 * (x - w / 2) / (0.5 * zoom * w) + moveX;
-			new_imaginary = (y - h / 2) / (0.5 * zoom * h) + moveY;
-			i = 0;
-			while (i < maxIterations)
-			{
-				old_real = new_real;
-				old_imaginary = new_imaginary;
-				new_real = old_real * old_real - old_imaginary * old_imaginary + c_real;
-				new_imaginary = 2 * old_real * old_imaginary + c_imaginary;
-				if ((new_real * new_real + new_imaginary * new_imaginary) > 4)
-					break;
-				i++;
-			}
-			color = HSVtoRGB(ColorHSV(i % 256, 255, 255 * (i < maxIterations))); // this function has to be built
-			draw_pixel(map, x, y, color);
-			x++;
+			printf("Final value out of bounds\n");
+			return ;
 		}
-		y++;
+		i++;
 	}
-	expose();
+	printf("final value of %f + %fi\n", new_real, new_imaginary);
+	//color = HSVtoRGB(ColorHSV(i % 256, 255, 255 * (i < maxIterations))); // this function has to be built
+	draw_pixel(map, pt->x, pt->y, 0xFF0000);
+}
+
+/*
+** Can be used to apply any function to ever dot on the map
+*/
+
+void	iteratePoints(t_map *map, void (*f)(t_map *, t_pt *))
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			f(map, map->dots[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	mandelbrot(t_map *map)
+{
+	map->fractal = (t_fractal *)malloc(sizeof(t_fractal));
+	if (!(map->fractal))
+		error("malloc failure\n");
+	iteratePoints(map, &complex_plane);
+	map->fractal->maxIterations = 200;
+	iteratePoints(map, &mandelbrot_iteration);
+}
+
+/*
+** Call init_map and then fractol types depending on input parameter
+*/
+
+int		main(void)
+{
+	t_map	*map;
+
+	init_map(&map, 400, 400, "Mandelbrot");
+	mandelbrot(map);
+	while (1)
+	{
+		expose_hook(map);
+		//mlx_key_hook(map->window, key_hook, map);
+		//mlx_mouse_hook(map->window, mouse_hook, map);
+		mlx_loop(map->connection);
+	}
 	return (0);
 }

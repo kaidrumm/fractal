@@ -10,24 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fractol.h"
+
+/*
+** Should make the error protection in this function look cleaner
+*/
+
 int		init_map(t_map **map, int w, int h, char *title)
 {
+	int		i;
+
 	(*map) = (t_map *)malloc(sizeof(t_map));
 	MALLOC_GUARD(*map);
-	(*map)->dots = (t_pt ***)malloc(sizeof(t_pt **) * 2000);
+	(*map)->dots = (t_pt ***)malloc(sizeof(t_pt **) * h);
 	MALLOC_GUARD((*map)->dots);
-	(*map)->max_x = 0;
-	(*map)->max_z = 0;
-	(*map)->w = w;
-	(*map)->h = h;
-	(*map)->cnx = mlx_init();
-	(*map)->win = mlx_new_window((*map)->cnx, (*map)->w, (*map)->h, title);
-	(*map)->image_option = 1;
-	(*map)->projection_option = 1;
-	(*map)->img = mlx_new_image((*map)->cnx, (*map)->w, (*map)->h);
-	(*map)->addr = mlx_get_data_addr((*map)->img, &((*map)->bpp),
-		&((*map)->bpl), &((*map)->endian));
-	if (!(*map)->addr || !(*map)->img || !(*map)->win)
+	i = 0;
+	while (i < h)
+	{
+		(*map)->dots[i] = (t_pt **)malloc(sizeof(t_pt *) * w);
+		MALLOC_GUARD((*map)->dots[i]);
+		i++;
+	}
+	(*map)->width = w;
+	(*map)->height = h;
+	(*map)->connection = mlx_init();
+	(*map)->window = mlx_new_window((*map)->connection, (*map)->width, (*map)->height, title);
+	(*map)->image = mlx_new_image((*map)->connection, (*map)->width, (*map)->height);
+	(*map)->address = mlx_get_data_addr((*map)->image, &((*map)->bits_per_pixel),
+		&((*map)->bytes_per_line), &((*map)->endian));
+	if (!(*map)->address || !(*map)->image || !(*map)->window)
 		return (0);
 	return (1);
 }

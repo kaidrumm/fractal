@@ -6,21 +6,18 @@
 /*   By: kdrumm <kdrumm@student.42.us.org>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:46:19 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/02/21 22:46:20 by kdrumm           ###   ########.fr       */
+/*   Updated: 2017/02/21 22:46:20 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fractol.h"
+
 void	draw_pixel(t_map *map, int x, int y, int color)
 {
-	char	*addr;
+	char	*address;
 
-	if (x < 0 || y < 0 || x >= map->w || y >= map->h)
+	if (x < 0 || y < 0 || x >= map->width || y >= map->height)
 		return ;
-	if (map->image_option == 1)
-	{
-		addr = &(map->addr[((map->bpp) * x / 8) + ((map->bpl) * y)]);
-		ft_memcpy(addr, &color, (map->bpp) / 8);
-	}
-	else
-		mlx_pixel_put(map->cnx, map->win, x, y, 0Xd56497);
+	address = &(map->address[((map->bits_per_pixel) * x / 8) + ((map->bytes_per_line) * y)]);
+	ft_memcpy(address, &color, (map->bits_per_pixel) / 8);
 }

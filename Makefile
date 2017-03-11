@@ -10,11 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
+NAME = fractol
 CFLAGS = -Wall -Wextra -Werror
 MINILIBX = -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
 LIBFT = -L libft/ -lft
-SRCS = fdf.c fdf2.c fdf3.c fdf4.c fdf5.c fdf6.c
+HEADER = fractol.h
+SRCS = main.c init_map.c draw_pixel.c
 
 .PHONY: clean fclean re
 
@@ -25,7 +26,7 @@ $(NAME):
 	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) $(MINILIBX) $(LIBFT)
 
 norme:
-	norminette $(SRCS) fdf.h
+	norminette $(SRCS) $(HEADER)
 
 clean:
 	rm -f *.o
