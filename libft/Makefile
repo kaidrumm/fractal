@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kdrumm <kdrumm@student.42.fr>              +#+  +:+       +#+         #
+#    By: Kelly <kdrumm@student.42.us.org>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/21 14:34:32 by kdrumm            #+#    #+#              #
-#    Updated: 2016/10/24 15:57:59 by kdrumm           ###   ########.fr        #
+#    Updated: 2017/03/13 22:40:31 by KaiDrumm         ###   ########.us        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,9 @@ SRC_NAME = ft_memset.c \
 			ft_lstpop.c \
 			ft_strnlen.c \
 			get_next_line.c \
-			ft_swap.c
+			ft_swap.c \
+			maximum_doubles.c \
+			minimum_doubles.c
 OBJ_NAME = $(SRC_NAME:.c=.o)
 TESTFILE = test.c test1.c test2.c test3.c test4.c test5.c test6.c testlist.c
 

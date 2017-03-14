@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hsv_rgb.c                                          :+:      :+:    :+:   */
+/*   minimum_doubles.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kelly <kdrumm@student.42.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/13 20:12:56 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/03/13 21:50:43 by KaiDrumm         ###   ########.us       */
+/*   Created: 2017/03/13 22:12:29 by KaiDrumm          #+#    #+#             */
+/*   Updated: 2017/03/13 22:15:47 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libft.h"
 
-t_rbg	hsv2rgb(t_hsv hsv)
+double		minimum_doubles(int n, ...)
 {
+	va_list	numbers;
+	double	minimum;
+	double	temp;
 
-}
-
-t_hsv	rgb2hsv(t_rgb rgb)
-{
-	
+	va_start(numbers, n)
+	maximum = va_arg(numbers, double);
+	while (n--)
+	{
+		temp = va_arg(numbers, double)
+		if (temp < maximum)
+			maximum = temp;
+	}
+	va_end(numbers);
+	return (minimum);
 }

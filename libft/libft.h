@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdrumm <kdrumm@student.42.fr>              +#+  +:+       +#+        */
+/*   By: Kelly <kdrumm@student.42.us.org>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 13:47:52 by kdrumm            #+#    #+#             */
-/*   Updated: 2016/10/27 20:10:42 by kdrumm           ###   ########.fr       */
+/*   Updated: 2017/03/13 22:13:41 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdarg.h>
+# include <stdio.h>
 # define MALLOC_GUARD(x) if(!x) return (0);
 # define ABS(x) ((x) < 0) ? -(x) : (x)
 # define MAX(a, b) (a >= b) ? a : b
@@ -86,6 +88,7 @@ int				ft_atoi_base(char *str, int base);
 char			*ft_itoa(int n);
 char			*ft_itoa_base(int n, int base);
 void			ft_swap(int *a, int *b);
+int             get_next_line(const int fd, char **line);
 
 /*
 ** Printout
@@ -122,6 +125,11 @@ t_list			*ft_strsplit_list(char const *s, char c);
 void			ft_lstinsert(t_list *prev, t_list *insert);
 t_list			*ft_lstsort(t_list *lst, int (*cmp)(void *, void *));
 
-int             get_next_line(const int fd, char **line);
+/*
+** Math functions
+*/
+double			maximum_doubles(int n, ...);
+double			minimum_doubles(int n, ...);
+
 
 #endif
