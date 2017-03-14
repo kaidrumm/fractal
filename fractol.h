@@ -20,6 +20,20 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+typedef struct	s_rbg
+{
+	double	r;
+	double	g;
+	double	b;
+}				t_rbg;
+
+typedef struct	s_hsv
+{
+	double	h;
+	double	s;
+	double	v;
+}				t_hsv;
+
 typedef struct	s_fractal
 {
 	int			maxIterations;
