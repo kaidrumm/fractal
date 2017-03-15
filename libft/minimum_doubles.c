@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimum_doubles.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kelly <kdrumm@student.42.us.org>           +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 22:12:29 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/03/13 22:15:47 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/14 15:27:23 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ double		minimum_doubles(int n, ...)
 	double	minimum;
 	double	temp;
 
-	va_start(numbers, n)
-	maximum = va_arg(numbers, double);
+	va_start(numbers, n);
+	minimum = va_arg(numbers, double);
 	while (n--)
 	{
-		temp = va_arg(numbers, double)
-		if (temp < maximum)
-			maximum = temp;
+		temp = va_arg(numbers, double);
+		if (temp < minimum)
+			minimum = temp;
 	}
 	va_end(numbers);
 	return (minimum);

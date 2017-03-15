@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maximum.c                                          :+:      :+:    :+:   */
+/*   maximum_doubles.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kelly <kdrumm@student.42.us.org>           +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 21:51:23 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/03/13 22:14:16 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/14 15:27:20 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ double		maximum_doubles(int n, ...)
 	double	maximum;
 	double	temp;
 
-	va_start(numbers, n)
+	va_start(numbers, n);
 	maximum = va_arg(numbers, double);
 	while (n--)
 	{
-		temp = va_arg(numbers, double)
+		temp = va_arg(numbers, double);
 		if (temp > maximum)
 			maximum = temp;
 	}
