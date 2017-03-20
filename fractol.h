@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/14 20:16:41 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/17 15:24:52 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-typedef struct	s_rbg
+typedef struct	s_rgb
 {
 	double	r;
 	double	g;
 	double	b;
-}				t_rbg;
+}				t_rgb;
 
 typedef struct	s_hsv
 {
