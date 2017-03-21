@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/17 15:24:52 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/20 17:56:49 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,12 @@
 # include <stdio.h>
 # include <fcntl.h>
 
-typedef struct	s_rgb
+typedef struct	s_triple
 {
-	double	r;
-	double	g;
+	double	a;
 	double	b;
-}				t_rgb;
-
-typedef struct	s_hsv
-{
-	double	h;
-	double	s;
-	double	v;
-}				t_hsv;
+	double	c;
+}				t_triple;
 
 typedef struct	s_fractal
 {
