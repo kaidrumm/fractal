@@ -6,7 +6,7 @@
 #    By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/14 17:43:28 by kdrumm            #+#    #+#              #
-#    Updated: 2017/03/20 10:48:14 by kaidrumm         ###   ########.us        #
+#    Updated: 2017/03/20 18:51:19 by kaidrumm         ###   ########.us        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 MINILIBX = -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
 LIBFT = -L libft/ -lft
 HEADER = fractol.h
-SRCS = main.c init_map.c draw_pixel.c
+SRCS = main.c init_map.c draw_pixel.c hsv_rgb.c
 
 .PHONY: clean fclean re
 

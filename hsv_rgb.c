@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:12:56 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/03/20 18:09:19 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/20 18:50:52 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,32 +124,32 @@ t_triple	*rgb2hsv(t_triple *rgb)
 	return (hsv);
 }
 
-int			main(int ac, char **av)
-{
-	t_triple	*rgb;
-	t_triple	*hsv;
+// int			main(int ac, char **av)
+// {
+// 	t_triple	*rgb;
+// 	t_triple	*hsv;
 
-	if (ac != 5)
-		ft_error("Usage: <program name> <1: rgb->hsv or 2: hsv->rgb> <value value value>\n");
-	if (atoi(av[1]) == 1) 
-	{
-		rgb = (t_triple *)malloc(sizeof(*rgb));
-		if (!rgb)
-			ft_error("Malloc error in main\n");
-		update_triple(rgb, atof(av[2])/255, atof(av[3])/255, atof(av[4])/255);
-		printf("Red: %f Green: %f Blue: %f\n", rgb->a, rgb->c, rgb->c);
-		hsv = rgb2hsv(rgb);
-		printf("Hue: %f Sat: %f Val: %f\n", hsv->a, hsv->b, hsv->c);
-	}
-	else if (atoi(av[1]) == 2)
-	{
-		hsv = (t_triple *)malloc(sizeof(*hsv));
-		if (!hsv)
-			ft_error("Malloc error in main\n");
-		update_triple(hsv, atof(av[2]), atof(av[3]), atof(av[4]));
-		printf("Hue: %f Saturation: %f Value: %f\n", hsv->a, hsv->b, hsv->c);
-		rgb = hsv2rgb(hsv);
-		printf("Red: %f Green: %f Blue: %f\n", rgb->a, rgb->c, rgb->c);
-	}
-	return (0);
-}
+// 	if (ac != 5)
+// 		ft_error("Usage: <program name> <1: rgb->hsv or 2: hsv->rgb> <value value value>\n");
+// 	if (atoi(av[1]) == 1) 
+// 	{
+// 		rgb = (t_triple *)malloc(sizeof(*rgb));
+// 		if (!rgb)
+// 			ft_error("Malloc error in main\n");
+// 		update_triple(rgb, atof(av[2])/255, atof(av[3])/255, atof(av[4])/255);
+// 		printf("Red: %f Green: %f Blue: %f\n", rgb->a, rgb->c, rgb->c);
+// 		hsv = rgb2hsv(rgb);
+// 		printf("Hue: %f Sat: %f Val: %f\n", hsv->a, hsv->b, hsv->c);
+// 	}
+// 	else if (atoi(av[1]) == 2)
+// 	{
+// 		hsv = (t_triple *)malloc(sizeof(*hsv));
+// 		if (!hsv)
+// 			ft_error("Malloc error in main\n");
+// 		update_triple(hsv, atof(av[2]), atof(av[3]), atof(av[4]));
+// 		printf("Hue: %f Saturation: %f Value: %f\n", hsv->a, hsv->b, hsv->c);
+// 		rgb = hsv2rgb(hsv);
+// 		printf("Red: %f Green: %f Blue: %f\n", rgb->a, rgb->c, rgb->c);
+// 	}
+// 	return (0);
+// }

@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/20 10:50:04 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/20 18:56:44 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,39 @@ int		expose_hook(t_map *map)
 	return (1);
 }
 
-void	error(char *message)
+int		rgbtoi(t_triple *rgb)
 {
-	ft_putstr(message);
-	exit(1);
+	int		r;
+	int		b;
+	int		g;
+
+	r = (int)round(rgb->a);
+	g = (int)round(rgb->b);
+	b = (int)round(rgb->c);
+	if (rgb->a < 1 && rgb->b < 1 && rgb->c < 1)
+	{
+		r = (int)round(rgb->a * 255);
+		g = (int)round(rgb->b * 255);
+		b = (int)round(rgb->c * 255);
+	}
+	return ((r * 0x10000) + (g * 0x100) + b);
 }
 
 void	mandelbrot_iteration(t_map *map, t_pt *pt)
 {
-	int		i;
-	double	c_real;
-	double	c_imaginary;
-	double	new_real;
-	double	new_imaginary;
-	double	old_real;
-	double	old_imaginary;
+	int			i;
+	double		c_real;
+	double		c_imaginary;
+	double		new_real;
+	double		new_imaginary;
+	double		old_real;
+	double		old_imaginary;
+	t_triple	*hsv;
+	t_triple	*rgbcolor;
 
+	hsv = (t_triple *)malloc(sizeof(*hsv));
+	if (!hsv)
+		ft_error("Malloc error in mandelbrot_iteration");
 	c_real = (double)pt->real;
 	c_imaginary = (double)pt->imaginary;
 	new_real = 0;
@@ -53,15 +70,15 @@ void	mandelbrot_iteration(t_map *map, t_pt *pt)
 		new_real = old_real * old_real - old_imaginary * old_imaginary + c_real;
 		new_imaginary = 2 * old_real * old_imaginary + c_imaginary;
 		if (new_real * new_real + new_imaginary * new_imaginary > 4)
-		{
-			printf("Final value out of bounds\n");
-			return ;
-		}
+			ft_error("Final value out of bounds");
 		i++;
 	}
+	hsv->a = i % 360;
+	hsv->b = 1;
+	hsv->c = 1 * (i < map->fractal->maxIterations);
 	printf("final value of %f + %fi\n", new_real, new_imaginary);
-	//color = HSVtoRGB(ColorHSV(i % 256, 255, 255 * (i < maxIterations))); // this function has to be built
-	draw_pixel(map, pt->x, pt->y, 0xFF0000);
+	rgbcolor = hsv2rgb(hsv);
+	draw_pixel(map, pt->x, pt->y, rgbtoi(rgbcolor));
 }
 
 /*
@@ -90,7 +107,7 @@ void	mandelbrot(t_map *map)
 {
 	map->fractal = (t_fractal *)malloc(sizeof(t_fractal));
 	if (!(map->fractal))
-		error("malloc failure\n");
+		ft_error("Malloc failure in mandelbrot");
 	iteratePoints(map, &complex_plane);
 	map->fractal->maxIterations = 200;
 	iteratePoints(map, &mandelbrot_iteration);

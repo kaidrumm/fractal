@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/20 17:56:49 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/20 18:53:43 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,15 @@ typedef struct	s_map
 	t_fractal	*fractal;
 }				t_map;
 
-void	error(char *message);
-void	mandelbrot(t_map *map);
-int		expose_hook(t_map *map);
-void	complex_plane(t_map *map, t_pt *pt);
-void	draw_pixel(t_map *map, int x, int y, int color);
-int		init_map(t_map **map, int w, int h, char *title);
-void	mandelbrot_iteration(t_map *map, t_pt *pt);
-void	iteratePoints(t_map *map, void (*f)(t_map *, t_pt *));
+void		error(char *message);
+void		mandelbrot(t_map *map);
+int			expose_hook(t_map *map);
+void		complex_plane(t_map *map, t_pt *pt);
+void		draw_pixel(t_map *map, int x, int y, int color);
+int			init_map(t_map **map, int w, int h, char *title);
+t_triple	*hsv2rgb(t_triple *hsv);
+t_triple	*rgb2hsv(t_triple *rgb);
+void		mandelbrot_iteration(t_map *map, t_pt *pt);
+void		iteratePoints(t_map *map, void (*f)(t_map *, t_pt *));
 
 #endif
