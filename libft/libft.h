@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 13:47:52 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/17 15:32:28 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/20 11:01:46 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int             get_next_line(const int fd, char **line);
 void			ft_putchar(char c);
 void			ft_putstr(char const *s);
 void			ft_putendl(char const *s);
+void			ft_error(char const *s);
 void			ft_putnbr(int n);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);

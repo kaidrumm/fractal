@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/14 20:16:40 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/20 10:50:04 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,14 @@ void	mandelbrot(t_map *map)
 int		main(void)
 {
 	t_map	*map;
+	// double	a;
+	// double	b;
+	// double	c;
+
+	// a = 4.2;
+	// b = .42;
+	// c = 24.24242;
+	// printf("Maximum of %f, %f, %f is %f\n", a, b, c, maximum_doubles(3, a, b, c));
 
 	init_map(&map, 400, 400, "Mandelbrot");
 	mandelbrot(map);
