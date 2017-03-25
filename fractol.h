@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/20 18:53:43 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/24 19:06:27 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+typedef struct	s_imaginary
+{
+	double	r;
+	double	i;
+}				t_imaginary;
+
 typedef struct	s_triple
 {
 	double	a;
@@ -29,17 +35,12 @@ typedef struct	s_triple
 
 typedef struct	s_fractal
 {
-	int			maxIterations;
+	int			maxIter;
+	int			type;
+	t_imaginary	c;
+	t_imaginary	next;
+	t_imaginary	old;
 }				t_fractal;
-
-typedef struct	s_pt
-{
-	int		x;
-	int		y;
-	int		z;
-	double	real;
-	double	imaginary;
-}				t_pt;
 
 typedef struct	s_map
 {
@@ -47,7 +48,6 @@ typedef struct	s_map
 	void		*window;
 	void		*image;
 	char		*address;
-	t_pt		***dots;
 	int			width;
 	int			height;
 	int			bits_per_pixel;
@@ -59,12 +59,22 @@ typedef struct	s_map
 void		error(char *message);
 void		mandelbrot(t_map *map);
 int			expose_hook(t_map *map);
-void		complex_plane(t_map *map, t_pt *pt);
+int			rgbtoi(t_triple *rgb);
+void		mandelbrot(t_map *map);
+void		julia(t_map *map, double cr, double ci);
+void		cubic(t_map *map);
+void		fractal(t_map *map, int x, int y);
+double		scale2window(int scale, int pixel);
+void		fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginary *c);
 void		draw_pixel(t_map *map, int x, int y, int color);
+void		init_fractal(t_map *map);
 int			init_map(t_map **map, int w, int h, char *title);
+int			check_range(double value, double min, double max, char *msg);
+void		update_inum(t_imaginary *n, double a, double b);
+void		update_triple(t_triple *abc, double x, double y, double z);
 t_triple	*hsv2rgb(t_triple *hsv);
 t_triple	*rgb2hsv(t_triple *rgb);
-void		mandelbrot_iteration(t_map *map, t_pt *pt);
-void		iteratePoints(t_map *map, void (*f)(t_map *, t_pt *));
+void		start_conditions(t_map *map, t_imaginary *c, t_imaginary *next, int x, int y);
+void		iteratePoints(t_map *map, void (*f)(t_map *, int x, int y));
 
 #endif
