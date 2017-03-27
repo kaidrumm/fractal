@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:17:35 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/24 19:06:40 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/27 15:16:29 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Can be used to apply any function to every pixel or dot on the map
 */
 
-void	iteratePoints(t_map *map, void (*f)(t_map *, int x, int y))
+void	iteratePoints(t_map *map)
 {
 	int		i;
 	int		j;
@@ -28,7 +28,7 @@ void	iteratePoints(t_map *map, void (*f)(t_map *, int x, int y))
 		i = 0;
 		while (i < map->width)
 		{
-			f(map, i, j);
+			fractal(map, i, j);
 			i++;
 		}
 		j++;
@@ -40,6 +40,10 @@ void	init_fractal(t_map *map)
 	if (!(map->fractal = (t_fractal *)malloc(sizeof(t_fractal))))
 		ft_error("Malloc failure initializing fractal");
 	map->fractal->maxIter = 500;
+	map->fractal->x_min = -2;
+	map->fractal->y_min = -2;
+	map->fractal->x_max = 2;
+	map->fractal->y_max = 2;
 }
 
 int		init_map(t_map **map, int w, int h, char *title)

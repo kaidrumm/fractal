@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/24 19:06:27 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/27 15:16:32 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ typedef struct	s_fractal
 {
 	int			maxIter;
 	int			type;
+	double		x_min;
+	double		x_max;
+	double		y_min;
+	double		y_max;
 	t_imaginary	c;
 	t_imaginary	next;
 	t_imaginary	old;
@@ -62,7 +66,8 @@ int			expose_hook(t_map *map);
 int			rgbtoi(t_triple *rgb);
 void		mandelbrot(t_map *map);
 void		julia(t_map *map, double cr, double ci);
-void		cubic(t_map *map);
+void		cubic_mandelbrot(t_map *map);
+void		cubic_julia(t_map *map, double cr, double ci);
 void		fractal(t_map *map, int x, int y);
 double		scale2window(int scale, int pixel);
 void		fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginary *c);
@@ -75,6 +80,6 @@ void		update_triple(t_triple *abc, double x, double y, double z);
 t_triple	*hsv2rgb(t_triple *hsv);
 t_triple	*rgb2hsv(t_triple *rgb);
 void		start_conditions(t_map *map, t_imaginary *c, t_imaginary *next, int x, int y);
-void		iteratePoints(t_map *map, void (*f)(t_map *, int x, int y));
+void		iteratePoints(t_map *map);
 
 #endif

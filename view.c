@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   view.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:52:42 by kaidrumm          #+#    #+#             */
-/*   Updated: 2017/03/23 21:07:57 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/27 15:16:30 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	translate(double delta_x, double delta_y)
+{
+
+}
+
+/*
+*
+void	zoom(double percent)
+{
+
+}
+/*/
+
+int		mouse_hook(int button, int x, int y, void *param)
+{
+	t_map	*map;
+
+	map = (t_map *)param;
+	map->fractal->c.r = x;
+	map->fractal->c.i = y;
+	expose_hook(map);
+	return (0);
+}
+
+int		expose_hook(t_map *map)
+{
+	ft_bzero(map->addr, map->bpl * map->h);
+	mlx_clear_window(map->cnx, map->win);
+	// do stuff to set image
+	iteratePoints(map);
+	mlx_put_image_to_window(map->cnx, map->win, map->img, 0, 0);
+	return (1);
+}
 
 /*
 ** Take the pixel measured from 0 to W/H and scale it to the map area from
