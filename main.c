@@ -6,7 +6,7 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/27 15:57:51 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/28 20:04:46 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ void	fractal(t_map *map, int x, int y)
 		fractal_iteration(map->fractal->type, &old, &next, &c);
 		if ((next.r * next.r) + (next.i * next.i) > 4)
 		{
-			update_triple(hsv, ((double)i / (double)map->fractal->maxIter) * 360, 1, 1);
-			printf("Iteration for %f, %f: i ended at %i, final value of %f + %fi, HSV of %f, %f, %f\n", c.r, c.i, i, next.r, next.i, hsv->a, hsv->b, hsv->c);
-			draw_pixel(map, x, y, rgbtoi(hsv2rgb(hsv)));
+			draw_pixel(map, x, y, rgbtoi(color(i)));
+			//update_triple(hsv, ((double)i / (double)map->fractal->maxIter) * 360, 1, 1);
+			//printf("Iteration for %f, %f: i ended at %i, final value of %f + %fi, HSV of %f, %f, %f\n", c.r, c.i, i, next.r, next.i, hsv->a, hsv->b, hsv->c);
+			//draw_pixel(map, x, y, rgbtoi(hsv2rgb(hsv)));
 			return ;
 		}
 		i++;
@@ -135,18 +136,8 @@ int		main(int ac, char **av)
 		cubic_julia(map, atof(av[2]), atof(av[3]));
 	}
 	else
-	{
 		ft_error("Usage: [./fractol 1] = Mandelbrot, [./fractol 2 {Cr, Ci}] = Julia\n");
-		return (1);
-	}
 	expose_hook(map);
 	mlx_loop(map->connection);
-	// while (1)
-	// {
-	// 	expose_hook(map);
-	// 	//mlx_key_hook(map->window, key_hook, map);
-	// 	//mlx_mouse_hook(map->window, mouse_hook, map);
-	// 	mlx_loop(map->connection);
-	// }
 	return (0);
 }

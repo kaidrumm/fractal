@@ -6,7 +6,7 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/27 15:55:14 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/28 20:04:39 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void		mandelbrot(t_map *map);
 int			expose_hook(t_map *map);
 int			rgbtoi(t_triple *rgb);
 void		mandelbrot(t_map *map);
+t_triple	*color(int i);
 void		julia(t_map *map, double cr, double ci);
 void		cubic_mandelbrot(t_map *map);
 void		cubic_julia(t_map *map, double cr, double ci);

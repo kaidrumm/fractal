@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+         #
+#    By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/14 17:43:28 by kdrumm            #+#    #+#              #
-#    Updated: 2017/03/23 20:56:39 by kaidrumm         ###   ########.us        #
+#    Updated: 2017/03/28 20:05:10 by KaiDrumm         ###   ########.us        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 MINILIBX = -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
 LIBFT = -L libft/ -lft
 HEADER = fractol.h
-SRCS = main.c map.c draw_pixel.c hsv_rgb.c view.c triple.c
+SRCS = main.c map.c draw_pixel.c hsv_rgb.c view.c triple.c color.c
 
 .PHONY: clean fclean re
 
