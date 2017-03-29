@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/28 20:04:46 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/28 20:19:43 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginar
 		update_inum(old, next->r, next->i);
 		update_inum(next, pow(old->r, 2) - pow(old->i, 2) + c->r, (2 * old->r * old->i) + c->i);
 	}
-	else if (type == 3)
+	else if (type == 3 || type == 4)
 	{
 		update_inum(old, next->r, next->i);
 		update_inum(next, pow(old->r, 3) - 3 * old->r * pow(old->i, 2) + c->r, c->i + 3 * pow(old->r, 2) * old->i - pow (old->i, 3));
@@ -33,7 +33,7 @@ void	start_conditions(t_map *map, t_imaginary *c, t_imaginary *next, int x, int 
 		update_inum(c, scale2window(map->width, x), scale2window(map->height, y));
 		update_inum(next, 0, 0);
 	}
-	else if (map->fractal->type == 2)
+	else if (map->fractal->type == 2 || map->fractal->type == 4)
 	{
 		update_inum(c, map->fractal->c.r, map->fractal->c.i);
 		printf("C is %f, %f\n", c->r, c->i);
@@ -48,6 +48,7 @@ void	start_conditions(t_map *map, t_imaginary *c, t_imaginary *next, int x, int 
 void	fractal(t_map *map, int x, int y)
 {
 	int			i;
+	//double		percent;
 	t_triple	*hsv;
 	t_imaginary c;
 	t_imaginary	next;
@@ -62,6 +63,7 @@ void	fractal(t_map *map, int x, int y)
 		fractal_iteration(map->fractal->type, &old, &next, &c);
 		if ((next.r * next.r) + (next.i * next.i) > 4)
 		{
+			//percent = (double)(i / (double)map->fractal->maxIter);
 			draw_pixel(map, x, y, rgbtoi(color(i)));
 			//update_triple(hsv, ((double)i / (double)map->fractal->maxIter) * 360, 1, 1);
 			//printf("Iteration for %f, %f: i ended at %i, final value of %f + %fi, HSV of %f, %f, %f\n", c.r, c.i, i, next.r, next.i, hsv->a, hsv->b, hsv->c);
@@ -91,13 +93,13 @@ void	julia(t_map *map, double cr, double ci)
 
 void	cubic_mandelbrot(t_map *map)
 {
-	map->fractal->type = 1;
+	map->fractal->type = 3;
 	iteratePoints(map);
 }
 
 void	cubic_julia(t_map *map, double cr, double ci)
 {
-	map->fractal->type = 2;
+	map->fractal->type = 4;
 	map->fractal->c.r = cr;
 	map->fractal->c.i = ci;
 	iteratePoints(map);

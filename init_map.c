@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:17:35 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/27 15:16:29 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/28 20:08:38 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	iteratePoints(t_map *map)
 	int		i;
 	int		j;
 
-	//printf("Iterate Points\n");
 	j = 0;
 	while (j < map->height)
 	{
