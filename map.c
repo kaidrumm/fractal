@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:17:35 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/24 19:07:05 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/03/27 15:57:45 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Can be used to apply any function to every pixel or dot on the map
 */
 
-void	iteratePoints(t_map *map, void (*f)(t_map *, int x, int y))
+void	iteratePoints(t_map *map)
 {
 	int		i;
 	int		j;
@@ -28,7 +28,7 @@ void	iteratePoints(t_map *map, void (*f)(t_map *, int x, int y))
 		i = 0;
 		while (i < map->width)
 		{
-			f(map, i, j);
+			fractal(map, i, j);
 			i++;
 		}
 		j++;

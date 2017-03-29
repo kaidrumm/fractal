@@ -6,24 +6,24 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:52:42 by kaidrumm          #+#    #+#             */
-/*   Updated: 2017/03/27 15:16:30 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/27 15:57:02 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	translate(double delta_x, double delta_y)
-{
+// void	translate(double delta_x, double delta_y)
+// {
 
-}
+// }
 
-/*
-*
-void	zoom(double percent)
-{
+// /*
+// *
+// void	zoom(double percent)
+// {
 
-}
-/*/
+// }
+// /*/
 
 int		mouse_hook(int button, int x, int y, void *param)
 {
@@ -33,16 +33,16 @@ int		mouse_hook(int button, int x, int y, void *param)
 	map->fractal->c.r = x;
 	map->fractal->c.i = y;
 	expose_hook(map);
-	return (0);
+	return (button);
 }
 
 int		expose_hook(t_map *map)
 {
-	ft_bzero(map->addr, map->bpl * map->h);
-	mlx_clear_window(map->cnx, map->win);
+	ft_bzero(map->address, map->bytes_per_line * map->height);
+	mlx_clear_window(map->connection, map->window);
 	// do stuff to set image
 	iteratePoints(map);
-	mlx_put_image_to_window(map->cnx, map->win, map->img, 0, 0);
+	mlx_put_image_to_window(map->connection, map->window, map->image, 0, 0);
 	return (1);
 }
 
@@ -57,13 +57,13 @@ double	scale2window(int scale, int pixel)
 	return ((4 / (double)scale) * (double)(pixel - (scale / 2)));
 }
 
-int		expose_hook(t_map *map)
-{
-	//printf("Expose hook\n");
-	mlx_clear_window(map->connection, map->window);
-	mlx_put_image_to_window(map->connection, map->window, map->image, 0, 0);
-	return (1);
-}
+// int		expose_hook(t_map *map)
+// {
+// 	//printf("Expose hook\n");
+// 	mlx_clear_window(map->connection, map->window);
+// 	mlx_put_image_to_window(map->connection, map->window, map->image, 0, 0);
+// 	return (1);
+// }
 
 // void	complex_plane(t_map *map, t_pt *pt)
 // {

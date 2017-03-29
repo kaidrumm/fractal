@@ -6,7 +6,7 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/27 15:16:28 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/03/27 15:57:51 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,10 @@ int		main(int ac, char **av)
 		printf("Cubic Mandelbrot set\n");
 		cubic_mandelbrot(map);
 	}
-	else if (atoi(av[1]) == 4)
+	else if (atoi(av[1]) == 4 && ac == 4)
 	{
 		printf("Cubic Julia set\n");
-		cubic_cubic(map);
+		cubic_julia(map, atof(av[2]), atof(av[3]));
 	}
 	else
 	{
