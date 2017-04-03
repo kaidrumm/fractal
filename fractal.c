@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/02 20:50:36 by KaiDrumm         ###   ########.us       */
+/*   Created: 2017/04/02 20:51:59 by KaiDrumm          #+#    #+#             */
+/*   Updated: 2017/04/02 20:54:52 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+** This takes care of the actual math which, when repeated, determines if a
+** point lies inside or outside of the fractal set.
+*/
 
 void	fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginary *c)
 {
@@ -25,6 +30,11 @@ void	fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginar
 		update_inum(next, pow(old->r, 3) - 3 * old->r * pow(old->i, 2) + c->r, c->i + 3 * pow(old->r, 2) * old->i - pow (old->i, 3));
 	}
 }
+
+/*
+** This sets the inital calculation values where they differ between
+** Mandelbrot and Julia sets.
+*/
 
 void	start_conditions(t_map *map, t_imaginary *c, t_imaginary *next, int x, int y)
 {
@@ -75,74 +85,9 @@ void	fractal(t_map *map, int x, int y)
 	draw_pixel(map, x, y, 0x000000);
 }
 
-void	mandelbrot(t_map *map)
+void	init_fractal(t_map *map)
 {
-	map->fractal->type = 1;
-	map->fractal->c.r = 0;
-	map->fractal->c.r = 0;
-	expose_hook(map);
-	mlx_loop(map->connection);
-}
-
-void	julia(t_map *map, double cr, double ci)
-{
-	map->fractal->type = 2;
-	map->fractal->c.r = cr;
-	map->fractal->c.i = ci;
-	expose_hook(map);
-	mlx_loop(map->connection);
-}
-
-void	cubic_mandelbrot(t_map *map)
-{
-	map->fractal->type = 3;
-	expose_hook(map);
-	mlx_loop(map->connection);
-}
-
-void	cubic_julia(t_map *map, double cr, double ci)
-{
-	map->fractal->type = 4;
-	map->fractal->c.r = cr;
-	map->fractal->c.i = ci;
-	expose_hook(map);
-	mlx_loop(map->connection);
-}
-
-/*
-** Call init_map and then fractol types depending on input parameter
-*/
-
-int		main(int ac, char **av)
-{
-	t_map	*map;
-
-	if (ac < 2)
-		ft_error("Usage: [./fractol 1] = Mandelbrot, [./fractol 2 {Cr, Ci}] = Julia\n");
-	init_map(&map, 400, 400, "");
-	init_fractal(map);
-	if (atoi(av[1]) == 1)
-	{
-		printf("Mandelbrot\n");
-		mandelbrot(map);
-	}
-	else if (atoi(av[1]) == 2 && ac == 4)
-	{
-		printf("Julia of %f, %f\n", atof(av[2]), atof(av[3]));
-		julia(map, atof(av[2]), atof(av[3]));
-	}
-	else if (atoi(av[1]) == 3)
-	{
-		printf("Cubic Mandelbrot set\n");
-		cubic_mandelbrot(map);
-	}
-	else if (atoi(av[1]) == 4 && ac == 4)
-	{
-		printf("Cubic Julia set\n");
-		cubic_julia(map, atof(av[2]), atof(av[3]));
-	}
-	else
-		ft_error("Usage: [./fractol 1] = Mandelbrot, [./fractol 2 {Cr, Ci}] = Julia\n");
-	mlx_loop(map->connection);
-	return (0);
+	if (!(map->fractal = (t_fractal *)malloc(sizeof(t_fractal))))
+		ft_error("Malloc failure initializing fractal");
+	map->fractal->maxIter = 500;
 }

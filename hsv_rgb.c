@@ -6,7 +6,7 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:12:56 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/03/27 15:16:33 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/02 20:56:41 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int		rgbtoi(t_triple *rgb)
 	int		b;
 	int		g;
 
-	//printf("RGB to I\n");
 	r = (int)round(rgb->a);
 	g = (int)round(rgb->b);
 	b = (int)round(rgb->c);
@@ -39,7 +38,6 @@ int		rgbtoi(t_triple *rgb)
 
 int			check_rgb_fraction(t_triple *rgb)
 {
-	//printf("Check RGB\n");
 	check_range(rgb->a, 0, 1, "Invalid red");
 	check_range(rgb->c, 0, 1, "Invalid green");
 	check_range(rgb->c, 0, 1, "Invalid blue");
@@ -48,7 +46,6 @@ int			check_rgb_fraction(t_triple *rgb)
 
 int			check_hsv(t_triple *hsv)
 {
-	//printf("Check HSV\n");
 	check_range(hsv->a, 0, 360, "Invalid hue");
 	check_range(hsv->b, 0, 1, "Invalid saturation");
 	check_range(hsv->c, 0, 1, "Invalid value");
@@ -66,7 +63,6 @@ t_triple	*hsv2rgb(t_triple *hsv)
 	t_triple	cmy;
 	int			sextant;
 
-	//printf("HSV to RGB\n");
 	check_hsv(hsv);
 	if (!(rgb = (t_triple *)malloc(sizeof(*rgb))))
 		ft_error("Malloc error");
@@ -108,7 +104,6 @@ t_triple	*rgb2hsv(t_triple *rgb)
 	double		max;
 	double		min;
 
-	//printf("RGB to HSV\n");
 	check_rgb_fraction(rgb);
 	if (!(hsv = (t_triple *)malloc(sizeof(*hsv))))
 		ft_error("Malloc error");

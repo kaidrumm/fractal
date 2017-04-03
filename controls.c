@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   triple.c                                           :+:      :+:    :+:   */
+/*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/23 20:56:06 by kaidrumm          #+#    #+#             */
-/*   Updated: 2017/04/02 20:58:21 by KaiDrumm         ###   ########.us       */
+/*   Created: 2017/04/02 20:48:50 by KaiDrumm          #+#    #+#             */
+/*   Updated: 2017/04/02 20:49:37 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+void	translate(double delta_x, double delta_y)
+{
+
+}
+
 /*
-** Essentially library functions
+**
 */
 
-int			check_range(double value, double min, double max, char *msg)
+void	zoom(double percent)
 {
-	if (value < min || value > max)
-		ft_error(msg);
-	return (0);
+
 }
 
-void		update_inum(t_imaginary *n, double a, double b)
-{
-	n->r = a;
-	n->i = b;
-}
+/*
+** Take the pixel measured from 0 to W/H and scale it to the map area from
+** -2 to +2 by centering (subtracting half the scale) and multiplying by 4/scale
+*/
 
-void		update_triple(t_triple *abc, double x, double y, double z)
+double	scale2window(int scale, int pixel)
 {
-	abc->a = x;
-	abc->b = y;
-	abc->c = z;
+	//printf("Scale to window\n");
+	return ((4 / (double)scale) * (double)(pixel - (scale / 2)));
 }

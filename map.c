@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:17:35 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/28 20:07:57 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/02 20:59:13 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /*
-** Can be used to apply any function to every pixel or dot on the map
+** This can be used to apply any function to every pixel or dot on the map.
 */
 
 void	iteratePoints(t_map *map)
@@ -21,7 +21,6 @@ void	iteratePoints(t_map *map)
 	int		i;
 	int		j;
 
-	//printf("Iterate Points\n");
 	j = 0;
 	while (j < map->height)
 	{
@@ -35,16 +34,12 @@ void	iteratePoints(t_map *map)
 	}
 }
 
-void	init_fractal(t_map *map)
-{
-	if (!(map->fractal = (t_fractal *)malloc(sizeof(t_fractal))))
-		ft_error("Malloc failure initializing fractal");
-	map->fractal->maxIter = 500;
-}
+/*
+** Might be generalized to the library to all graphic projects
+*/
 
 int		init_map(t_map **map, int w, int h, char *title)
 {
-	printf("Init map\n");
 	if (!((*map) = (t_map *)malloc(sizeof(t_map))))
 		ft_error("Malloc error in init_map");
 	(*map)->width = w;
