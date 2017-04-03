@@ -6,11 +6,11 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:12:56 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/02 20:56:41 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/02 21:27:40 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libvisual.h"
 
 /*
 ** Takes RGB values either in percentage form (between 0 and 1) or 0-255 values

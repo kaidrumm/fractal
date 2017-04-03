@@ -5,33 +5,37 @@
 #                                                     +:+ +:+         +:+      #
 #    By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/12/14 17:43:28 by kdrumm            #+#    #+#              #
-#    Updated: 2017/04/02 22:19:18 by KaiDrumm         ###   ########.us        #
+#    Created: 2016/09/21 14:34:32 by kdrumm            #+#    #+#              #
+#    Updated: 2017/04/02 21:27:10 by KaiDrumm         ###   ########.us        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fractol
+CC = gcc
+NAME = libvisual.a
 CFLAGS = -Wall -Wextra -Werror
-MINILIBX = -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
-LIBFT = -L libft/ -lft
-LIBVISUAL = -L libvisual/ -lvisual
-HEADER = fractol.h
-SRCS = main.c hooks.c fractal.c color.c controls.c
+SRC_NAME = draw_pixel.c \
+			hsv_rgb.c \
+			map.c \
+			triple.c
+OBJ_NAME = $(SRC_NAME:.c=.o)
+INCLUDE = -I ../include/libft.h
+LIBFT = -L ../libft/ -lft
 
 .PHONY: clean fclean re
 
 all: $(NAME)
 
-$(NAME):
-	cd libft/ && make
-	cd libvisual/ && make
-	$(CC) $(CFLAGS) -o $(NAME) $(SRCS) $(MINILIBX) $(LIBFT) $(LIBVISUAL)
+$(NAME): $(OBJ_NAME)
+	ar rcs $(NAME) $(OBJ_NAME)
+
+$(OBJ_NAME): $(SRC_NAME)
+	$(CC) -c $(CFLAGS) $(SRC_NAME) $(INCLUDE)
 
 norme:
-	norminette $(SRCS) $(HEADER)
+	norminette $(SRC_NAME)
 
 clean:
-	rm -f *.o
+	rm -f $(OBJ_NAME)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,11 +6,11 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:56:06 by kaidrumm          #+#    #+#             */
-/*   Updated: 2017/04/02 20:58:21 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/02 21:27:39 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libvisual.h"
 
 /*
 ** Essentially library functions

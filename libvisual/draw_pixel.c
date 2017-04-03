@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw_pixel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:46:19 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/03/23 21:10:29 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/02 21:27:27 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "libvisual.h"
 
 /*
 ** Skips drawing any pixel if it is out of range of the map area. Uses memcpy

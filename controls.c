@@ -6,7 +6,7 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 20:48:50 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/02 20:49:37 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/02 22:17:19 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	translate(double delta_x, double delta_y)
 {
-
+	printf("translate by %f, %f\n", delta_x, delta_y);
+	return ;
 }
 
 /*
@@ -23,7 +24,8 @@ void	translate(double delta_x, double delta_y)
 
 void	zoom(double percent)
 {
-
+	printf("Zoom to %f\n", percent);
+	return ;
 }
 
 /*
