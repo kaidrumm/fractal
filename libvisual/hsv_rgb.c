@@ -6,7 +6,7 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 20:12:56 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/02 21:27:40 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 20:39:42 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			check_hsv(t_triple *hsv)
 t_triple	*hsv2rgb(t_triple *hsv)
 {
 	t_triple	*rgb;
-	double		fract;
+	float		fract;
 	t_triple	cmy;
 	int			sextant;
 
@@ -98,35 +98,35 @@ t_triple	*hsv2rgb(t_triple *hsv)
 ** Expects RGB values as percentages between 0 and 1
 */
 
-t_triple	*rgb2hsv(t_triple *rgb)
-{
-	t_triple	*hsv;
-	double		max;
-	double		min;
+// t_triple	*rgb2hsv(t_triple *rgb)
+// {
+// 	t_triple	*hsv;
+// 	float		max;
+// 	float		min;
 
-	check_rgb_fraction(rgb);
-	if (!(hsv = (t_triple *)malloc(sizeof(*hsv))))
-		ft_error("Malloc error");
-	max = maximum_doubles(3, rgb->a, rgb->c, rgb->c);
-	min = minimum_doubles(3, rgb->a, rgb->c, rgb->c);
-	hsv->c = max;
-	if (max == 0)
-		hsv->b = 0;
-	else
-		hsv->b = (max - min) / max;
-	if (hsv->b == 0)
-		hsv->a = -1;
-	else
-	{
-		if (rgb->a == max)
-			hsv->a = (rgb->c - rgb->c) / (max - min);
-		else if (rgb->b == max)
-			hsv->a = 2 + (rgb->c - rgb->a) / (max - min);
-		else
-			hsv->a = 4 + (rgb->a - rgb->c) / (max - min);
-		hsv->a = 60 * hsv->a;
-		if (hsv->a < 0)
-			hsv->a = hsv->a + 360;
-	}
-	return (hsv);
-}
+// 	check_rgb_fraction(rgb);
+// 	if (!(hsv = (t_triple *)malloc(sizeof(*hsv))))
+// 		ft_error("Malloc error");
+// 	max = maximum_floats(3, rgb->a, rgb->c, rgb->c);
+// 	min = minimum_floats(3, rgb->a, rgb->c, rgb->c);
+// 	hsv->c = max;
+// 	if (max == 0)
+// 		hsv->b = 0;
+// 	else
+// 		hsv->b = (max - min) / max;
+// 	if (hsv->b == 0)
+// 		hsv->a = -1;
+// 	else
+// 	{
+// 		if (rgb->a == max)
+// 			hsv->a = (rgb->c - rgb->c) / (max - min);
+// 		else if (rgb->b == max)
+// 			hsv->a = 2 + (rgb->c - rgb->a) / (max - min);
+// 		else
+// 			hsv->a = 4 + (rgb->a - rgb->c) / (max - min);
+// 		hsv->a = 60 * hsv->a;
+// 		if (hsv->a < 0)
+// 			hsv->a = hsv->a + 360;
+// 	}
+// 	return (hsv);
+// }

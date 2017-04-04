@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/03 19:04:02 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 20:28:26 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	mandelbrot(t_fractal *frac)
 	frac->c.r = 0;
 }
 
-void	julia(t_fractal *frac, double cr, double ci)
+void	julia(t_fractal *frac, float cr, float ci)
 {
 	frac->type = 2;
 	frac->c.r = cr;
@@ -29,9 +29,11 @@ void	julia(t_fractal *frac, double cr, double ci)
 void	cubic_mandelbrot(t_fractal *frac)
 {
 	frac->type = 3;
+	frac->c.r = 0;
+	frac->c.i = 0;
 }
 
-void	cubic_julia(t_fractal *frac, double cr, double ci)
+void	cubic_julia(t_fractal *frac, float cr, float ci)
 {
 	frac->type = 4;
 	frac->c.r = cr;

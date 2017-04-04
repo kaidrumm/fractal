@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:52:42 by kaidrumm          #+#    #+#             */
-/*   Updated: 2017/04/03 19:03:58 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 20:28:19 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		mouse_hook(int button, int x, int y, t_fractal *frac)
 {
 	if (frac->type != 2 && frac->type != 4)
 		return (0);
-	frac->c.r = ((double)x * 2 / frac->map->width) - 1;
-	frac->c.i = ((double)y * 2 / frac->map->height) - 1;
+	frac->c.r = ((float)x * 2 / frac->map->width) - 1;
+	frac->c.i = ((float)y * 2 / frac->map->height) - 1;
 	expose_hook(frac);
 	return (button);
 }
@@ -36,14 +36,17 @@ int		key_hook(int keycode, t_fractal *frac)
 	printf("Pointer %p", frac);
 	if (keycode == 53)
 		exit(0);
-
 	return (keycode);
 }
 
+/*
+** Alters the julia set C coordinates continuously when the mouse drags across the window.
+*/
+
 int		mouse_move(int x, int y, t_fractal *frac)
 {
-	frac->c.r = ((double)x * 2 / frac->map->width) - 1;
-	frac->c.i = ((double)y * 2 / frac->map->height) - 1;
+	frac->c.r = ((float)x * 2 / frac->map->width) - 1;
+	frac->c.i = ((float)y * 2 / frac->map->height) - 1;
 	expose_hook(frac);
 	return (1);
 }

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   maximum_doubles.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 21:51:23 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/03/20 18:10:01 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 20:38:32 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "libft.h"
 

@@ -6,7 +6,7 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 20:51:59 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/02 22:17:32 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 20:29:01 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void		start_conditions(t_fractal *frac, t_imaginary *c, t_imaginary *next, int x
 	else if (frac->type == 2 || frac->type == 4)
 	{
 		update_inum(c, frac->c.r, frac->c.i);
-		printf("C is %f, %f\n", c->r, c->i);
 		update_inum(next, scale2window(frac->map->width, x), scale2window(frac->map->height, y));
 	}
 }
@@ -59,15 +58,15 @@ int			fractal(void *p, int x, int y)
 {
 	t_fractal	*frac;
 	int			i;
-	//double		percent;
-	t_triple	*hsv;
+	//float		percent;
+	// t_triple	*hsv;
 	t_imaginary c;
 	t_imaginary	next;
 	t_imaginary	old;
 
 	frac = (t_fractal *)p;
-	if (!(hsv = (t_triple *)malloc(sizeof(*hsv))))
-		ft_error("Malloc error in fractal_iteration");
+	// if (!(hsv = (t_triple *)malloc(sizeof(*hsv))))
+	// 	ft_error("Malloc error in fractal_iteration");
 	start_conditions(frac, &c, &next, x, y);
 	i = 0;
 	while (i < frac->maxIter)
@@ -75,9 +74,9 @@ int			fractal(void *p, int x, int y)
 		fractal_iteration(frac->type, &old, &next, &c);
 		if ((next.r * next.r) + (next.i * next.i) > 4)
 		{
-			//percent = (double)(i / (double)map->fractal->maxIter);
+			//percent = (float)(i / (float)map->fractal->maxIter);
 			draw_pixel(frac->map, x, y, rgbtoi(color(i)));
-			//update_triple(hsv, ((double)i / (double)map->fractal->maxIter) * 360, 1, 1);
+			//update_triple(hsv, ((float)i / (float)map->fractal->maxIter) * 360, 1, 1);
 			//printf("Iteration for %f, %f: i ended at %i, final value of %f + %fi, HSV of %f, %f, %f\n", c.r, c.i, i, next.r, next.i, hsv->a, hsv->b, hsv->c);
 			//draw_pixel(map, x, y, rgbtoi(hsv2rgb(hsv)));
 			return(1);
@@ -94,7 +93,7 @@ t_fractal	*init_fractal()
 
 	if (!(frac = (t_fractal *)malloc(sizeof(t_fractal))))
 		ft_error("Malloc failure initializing fractal");
-	frac->map = init_map(400, 400, "");
+	frac->map = init_map(1200, 1200, "");
 	frac->maxIter = 500;
 	return (frac);
 }

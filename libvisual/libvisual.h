@@ -6,7 +6,7 @@
 /*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 21:15:50 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/02 22:14:40 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 20:28:20 by KaiDrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@
 
 typedef struct	s_imaginary
 {
-	double	r;
-	double	i;
+	float	r;
+	float	i;
 }				t_imaginary;
 
 typedef struct	s_triple
 {
-	double	a;
-	double	b;
-	double	c;
+	float	a;
+	float	b;
+	float	c;
 }				t_triple;
 
 typedef struct	s_map
@@ -50,11 +50,11 @@ t_triple		*rgb2hsv(t_triple *rgb);
 t_triple		*hsv2rgb(t_triple *hsv);
 int				check_hsv(t_triple *hsv);
 int				check_rgb_fraction(t_triple *rgb);
-void			update_inum(t_imaginary *n, double a, double b);
+void			update_inum(t_imaginary *n, float a, float b);
 void			draw_pixel(t_map *map, int x, int y, int color);
 t_map			*init_map(int w, int h, char *title);
-void			update_triple(t_triple *abc, double x, double y, double z);
-int				check_range(double value, double min, double max, char *msg);
+void			update_triple(t_triple *abc, float x, float y, float z);
+int				check_range(float value, float min, float max, char *msg);
 void			iteratePoints(t_map *map, int (*f)(void	*p, int i, int j), void *p);
 
 #endif
