@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/02 21:57:50 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 19:04:02 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int		main(int ac, char **av)
 	expose_hook(frac);
 	mlx_key_hook(frac->map->window, key_hook, frac);
 	mlx_mouse_hook(frac->map->window, mouse_hook, frac);
+	mlx_hook(frac->map->window, 6, 0, mouse_move, frac);
 	mlx_loop(frac->map->connection);
 	return (0);
 }

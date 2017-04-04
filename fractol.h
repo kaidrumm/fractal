@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/02 22:16:02 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 19:04:01 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void			cubic_mandelbrot(t_fractal *frac);
 double			scale2window(int scale, int pixel);
 int				key_hook(int keycode, t_fractal *frac);
 int				fractal(void *frac, int x, int y);
+int				mouse_move(int x, int y, t_fractal *frac);
 void			julia(t_fractal *frac, double cr, double ci);
 void			cubic_julia(t_fractal *frac, double cr, double ci);
 int				mouse_hook(int button, int x, int y, t_fractal *frac);

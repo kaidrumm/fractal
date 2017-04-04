@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:52:42 by kaidrumm          #+#    #+#             */
-/*   Updated: 2017/04/02 22:14:54 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/03 19:03:58 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 int		mouse_hook(int button, int x, int y, t_fractal *frac)
 {
-	// t_fractal	*frac;
-
-	// frac = (t_fractal *)param;
-	frac->c.r = x;
-	frac->c.i = y;
+	if (frac->type != 2 && frac->type != 4)
+		return (0);
+	frac->c.r = ((double)x * 2 / frac->map->width) - 1;
+	frac->c.i = ((double)y * 2 / frac->map->height) - 1;
 	expose_hook(frac);
 	return (button);
 }
@@ -35,5 +34,16 @@ int		expose_hook(t_fractal *frac)
 int		key_hook(int keycode, t_fractal *frac)
 {
 	printf("Pointer %p", frac);
+	if (keycode == 53)
+		exit(0);
+
 	return (keycode);
+}
+
+int		mouse_move(int x, int y, t_fractal *frac)
+{
+	frac->c.r = ((double)x * 2 / frac->map->width) - 1;
+	frac->c.i = ((double)y * 2 / frac->map->height) - 1;
+	expose_hook(frac);
+	return (1);
 }
