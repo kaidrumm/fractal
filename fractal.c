@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   fractal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 20:51:59 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/03 20:29:01 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/04 13:28:36 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	draw(t_fractal *frac)
+{
+	expose_hook(frac);
+	// ft_bzero(frac->map->address, frac->map->bytes_per_line * frac->map->height);
+	// mlx_clear_window(frac->map->connection, frac->map->window);
+	// iteratePoints(frac->map, &scale2window, frac);
+	// mlx_put_image_to_window(frac->map->connection, frac->map->window, frac->map->image, 0, 0);
+}
 
 /*
 ** This takes care of the actual math which, when repeated, determines if a
@@ -36,17 +45,17 @@ void	fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginar
 ** Mandelbrot and Julia sets.
 */
 
-void		start_conditions(t_fractal *frac, t_imaginary *c, t_imaginary *next, int x, int y)
+void		start_conditions(t_fractal *frac, t_imaginary *c, t_imaginary *next, float x, float y)
 {
 	if (frac->type == 1 || frac->type == 3)
 	{
-		update_inum(c, scale2window(frac->map->width, x), scale2window(frac->map->height, y));
+		update_inum(c, x, y);
 		update_inum(next, 0, 0);
 	}
 	else if (frac->type == 2 || frac->type == 4)
 	{
 		update_inum(c, frac->c.r, frac->c.i);
-		update_inum(next, scale2window(frac->map->width, x), scale2window(frac->map->height, y));
+		update_inum(next, x, y);
 	}
 }
 
@@ -54,33 +63,26 @@ void		start_conditions(t_fractal *frac, t_imaginary *c, t_imaginary *next, int x
 ** Template for all 3 fractal types 
 */
 
-int			fractal(void *p, int x, int y)
+int			fractal(void *p, float x, float y)
 {
 	t_fractal	*frac;
 	int			i;
-	//float		percent;
-	// t_triple	*hsv;
 	t_imaginary c;
 	t_imaginary	next;
 	t_imaginary	old;
 
 	frac = (t_fractal *)p;
-	// if (!(hsv = (t_triple *)malloc(sizeof(*hsv))))
-	// 	ft_error("Malloc error in fractal_iteration");
 	start_conditions(frac, &c, &next, x, y);
 	i = 0;
 	while (i < frac->maxIter)
 	{
-		fractal_iteration(frac->type, &old, &next, &c);
 		if ((next.r * next.r) + (next.i * next.i) > 4)
 		{
-			//percent = (float)(i / (float)map->fractal->maxIter);
-			draw_pixel(frac->map, x, y, rgbtoi(color(i)));
-			//update_triple(hsv, ((float)i / (float)map->fractal->maxIter) * 360, 1, 1);
-			//printf("Iteration for %f, %f: i ended at %i, final value of %f + %fi, HSV of %f, %f, %f\n", c.r, c.i, i, next.r, next.i, hsv->a, hsv->b, hsv->c);
-			//draw_pixel(map, x, y, rgbtoi(hsv2rgb(hsv)));
+			//printf("Escaped at %f, %f\n", x, y);
+			draw_pixel(frac->map, scale2window_x(frac, x), scale2window_y(frac, y), rgbtoi(color(i)));
 			return(1);
 		}
+		fractal_iteration(frac->type, &old, &next, &c);
 		i++;
 	}
 	draw_pixel(frac->map, x, y, 0x000000);
@@ -93,7 +95,7 @@ t_fractal	*init_fractal()
 
 	if (!(frac = (t_fractal *)malloc(sizeof(t_fractal))))
 		ft_error("Malloc failure initializing fractal");
-	frac->map = init_map(1200, 1200, "");
-	frac->maxIter = 500;
+	frac->map = init_map(800, 800, "Fractal");
+	frac->maxIter = 50;
 	return (frac);
 }

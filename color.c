@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 19:59:36 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/03 20:30:32 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/04 12:47:07 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ t_triple	*color(float i)
 
 	if (!(rgb = (t_triple *)malloc(sizeof(*rgb))))
 		ft_error("Malloc error in color\n");
-	rgb->a = sin(i);
-	rgb->b = cos(i);
-	rgb->c = -cos(i);
-	rgb->a = rgb->a + 1;
-	rgb->b = rgb->b + 1;
-	rgb->c = rgb->c + 1;
-	rgb->a = rgb->a * 127;
-	rgb->b = rgb->b * 127;
-	rgb->c = rgb->c * 127;
-	//printf("Color of %f, %f, %f\n", rgb->a, rgb->b, rgb->c);
+	rgb->a = sinf(i);
+	rgb->b = cosf(i);
+	rgb->c = -cosf(i);
+	rgb->a += 1;
+	rgb->b += 1;
+	rgb->c += 1;
+	rgb->a *= 127;
+	rgb->b *= 127;
+	rgb->c *= 127;
+	//printf("At i of %f: R of %f, G of %f, B of %f\n", i, rgb->a, rgb->b, rgb->c);
 	return (rgb);
 }
