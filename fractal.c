@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 20:51:59 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/04 13:28:36 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/17 15:41:46 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ t_fractal	*init_fractal()
 	if (!(frac = (t_fractal *)malloc(sizeof(t_fractal))))
 		ft_error("Malloc failure initializing fractal");
 	frac->map = init_map(800, 800, "Fractal");
-	frac->maxIter = 50;
+	frac->maxIter = 20;
+	frac->x_offset = -2;
+	frac->y_offset = -2;
+	frac->width = 4;
+	frac->height = 4;
+	frac->zoom = 1;
 	return (frac);
 }

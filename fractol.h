@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/04 12:42:42 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/17 15:40:26 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ typedef struct	s_fractal
 {
 	int			maxIter;
 	int			type;
-	float		x_min;
-	float		x_max;
-	float		y_min;
-	float		y_max;
+	float		width;
+	float		height;
 	float		x_offset;
 	float		y_offset;
+	float		zoom;
 	t_imaginary	c;
 	t_imaginary	next;
 	t_imaginary	old;

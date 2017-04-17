@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/04 12:28:43 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/17 14:38:27 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,6 @@ int		main(int ac, char **av)
 		cubic_julia(frac, atof(av[2]), atof(av[3]));
 	else
 		ft_error("Usage: [./fractol 1] = Mandelbrot, [./fractol 2 {Cr, Ci}] = Julia\n");
-	frac->x_min = -2;
-	frac->y_min = -2;
-	frac->x_max = 2;
-	frac->y_max = 2;
-	frac->x_offset = -2;
-	frac->y_offset = -2;
 	expose_hook(frac);
 	mlx_key_hook(frac->map->window, key_hook, frac);
 	mlx_mouse_hook(frac->map->window, mouse_hook, frac);
