@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/23 20:52:42 by kaidrumm          #+#    #+#             */
-/*   Updated: 2017/04/18 22:28:59 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/19 11:54:12 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int		key_hook(int keycode, t_fractal *frac)
 
 int		mouse_move(int x, int y, t_fractal *frac)
 {
-	printf("Mouse move\n");
 	frac->c.r = ((float)x * 2 / frac->map->width) - 1;
 	frac->c.i = ((float)y * 2 / frac->map->height) - 1;
 	expose_hook(frac);
