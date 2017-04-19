@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+         #
+#    By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/14 17:43:28 by kdrumm            #+#    #+#              #
-#    Updated: 2017/04/03 20:28:14 by KaiDrumm         ###   ########.us        #
+#    Updated: 2017/04/18 22:23:40 by kaidrumm         ###   ########.us        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Ofast
 MINILIBX = -L minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
 LIBFT = -L libft/ -lft
 LIBVISUAL = -L libvisual/ -lvisual

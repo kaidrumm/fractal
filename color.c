@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/28 19:59:36 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/04 12:47:07 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/18 22:26:40 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ t_triple	*color(float i)
 	rgb->a *= 127;
 	rgb->b *= 127;
 	rgb->c *= 127;
-	//printf("At i of %f: R of %f, G of %f, B of %f\n", i, rgb->a, rgb->b, rgb->c);
 	return (rgb);
 }

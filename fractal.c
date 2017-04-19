@@ -6,37 +6,36 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/02 20:51:59 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/17 15:41:46 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/18 22:29:48 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	draw(t_fractal *frac)
-{
-	expose_hook(frac);
-	// ft_bzero(frac->map->address, frac->map->bytes_per_line * frac->map->height);
-	// mlx_clear_window(frac->map->connection, frac->map->window);
-	// iteratePoints(frac->map, &scale2window, frac);
-	// mlx_put_image_to_window(frac->map->connection, frac->map->window, frac->map->image, 0, 0);
-}
+// void	draw(t_fractal *frac)
+// {
+// 	expose_hook(frac);
+// }
 
 /*
 ** This takes care of the actual math which, when repeated, determines if a
 ** point lies inside or outside of the fractal set.
 */
 
-void	fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginary *c)
+void	fractal_iteration(int type, t_imaginary *old, t_imaginary *next,
+	t_imaginary *c)
 {
 	if (type == 1 || type == 2)
 	{
 		update_inum(old, next->r, next->i);
-		update_inum(next, pow(old->r, 2) - pow(old->i, 2) + c->r, (2 * old->r * old->i) + c->i);
+		update_inum(next, pow(old->r, 2) - pow(old->i, 2) + c->r,
+			(2 * old->r * old->i) + c->i);
 	}
 	else if (type == 3 || type == 4)
 	{
 		update_inum(old, next->r, next->i);
-		update_inum(next, pow(old->r, 3) - 3 * old->r * pow(old->i, 2) + c->r, c->i + 3 * pow(old->r, 2) * old->i - pow (old->i, 3));
+		update_inum(next, pow(old->r, 3) - 3 * old->r * pow(old->i, 2) + c->r,
+			c->i + 3 * pow(old->r, 2) * old->i - pow (old->i, 3));
 	}
 }
 
@@ -45,7 +44,8 @@ void	fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginar
 ** Mandelbrot and Julia sets.
 */
 
-void		start_conditions(t_fractal *frac, t_imaginary *c, t_imaginary *next, float x, float y)
+void		start_conditions(t_fractal *frac, t_imaginary *c,
+	t_imaginary *next, float x, float y)
 {
 	if (frac->type == 1 || frac->type == 3)
 	{
@@ -78,9 +78,9 @@ int			fractal(void *p, float x, float y)
 	{
 		if ((next.r * next.r) + (next.i * next.i) > 4)
 		{
-			//printf("Escaped at %f, %f\n", x, y);
-			draw_pixel(frac->map, scale2window_x(frac, x), scale2window_y(frac, y), rgbtoi(color(i)));
-			return(1);
+			draw_pixel(frac->map, scale2window_x(frac, x),
+				scale2window_y(frac, y), rgbtoi(color(i)));
+			return (1);
 		}
 		fractal_iteration(frac->type, &old, &next, &c);
 		i++;
@@ -89,7 +89,7 @@ int			fractal(void *p, float x, float y)
 	return (1);
 }
 
-t_fractal	*init_fractal()
+t_fractal	*init_fractal(int type)
 {
 	t_fractal	*frac;
 
@@ -102,5 +102,6 @@ t_fractal	*init_fractal()
 	frac->width = 4;
 	frac->height = 4;
 	frac->zoom = 1;
+	frac->type = type;
 	return (frac);
 }

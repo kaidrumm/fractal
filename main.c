@@ -6,63 +6,34 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/27 16:49:57 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/17 14:38:27 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/18 22:26:41 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	mandelbrot(t_fractal *frac)
+void		usage()
 {
-	frac->type = 1;
-	// frac->c.r = 0;
-	// frac->c.r = 0;
-}
-
-void	julia(t_fractal *frac, float cr, float ci)
-{
-	frac->type = 2;
-	frac->c.r = cr;
-	frac->c.i = ci;
-}
-
-void	cubic_mandelbrot(t_fractal *frac)
-{
-	frac->type = 3;
-	// frac->c.r = 0;
-	// frac->c.i = 0;
-}
-
-void	cubic_julia(t_fractal *frac, float cr, float ci)
-{
-	frac->type = 4;
-	frac->c.r = cr;
-	frac->c.i = ci;
+	ft_error("Usage: ./fractol f where f=1 for Mandelbrot, f=2 for Julia, \
+		f=3 for cubic mandelbrot, f=4 for cubic Julia, and f=5 for \
+		Burningship.\n");
 }
 
 /*
 ** Call init_map and then fractol types depending on input parameter
 */
 
-int		main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_fractal	*frac;
 	int			type;
 
-	if (ac < 2)
-		ft_error("Usage: [./fractol 1] = Mandelbrot, [./fractol 2 {Cr, Ci}] = Julia\n");
+	if (ac != 2)
+		usage();
 	type = atoi(av[1]);
-	frac = init_fractal();
-	if (type == 1)
-		mandelbrot(frac);
-	else if (type == 2 && ac == 4)
-		julia(frac, atof(av[2]), atof(av[3]));
-	else if (type == 3)
-		cubic_mandelbrot(frac);
-	else if (type == 4 && ac == 4)
-		cubic_julia(frac, atof(av[2]), atof(av[3]));
-	else
-		ft_error("Usage: [./fractol 1] = Mandelbrot, [./fractol 2 {Cr, Ci}] = Julia\n");
+	if (type < 1 || type > 5)
+		usage();
+	frac = init_fractal(type);
 	expose_hook(frac);
 	mlx_key_hook(frac->map->window, key_hook, frac);
 	mlx_mouse_hook(frac->map->window, mouse_hook, frac);

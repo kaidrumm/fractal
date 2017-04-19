@@ -6,7 +6,7 @@
 /*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/21 22:50:51 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/17 15:40:26 by kaidrumm         ###   ########.us       */
+/*   Updated: 2017/04/18 22:23:37 by kaidrumm         ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ typedef struct	s_fractal
 t_fractal		*init_fractal();
 t_triple		*color(float i);
 void			draw(t_fractal *frac);
-void			mandelbrot(t_fractal *frac);
-void			mandelbrot(t_fractal *frac);
 int				expose_hook(t_fractal *frac);
-void			cubic_mandelbrot(t_fractal *frac);
 int				scale2view(void *p, int x, int y);
 int				key_hook(int keycode, t_fractal *frac);
 int				fractal(void *frac, float x, float y);
@@ -51,8 +48,6 @@ int				scale2window_x(t_fractal *frac, float x);
 int				scale2window_y(t_fractal *frac, float y);
 void			translate(float delta_x, float delta_y);
 int				mouse_move(int x, int y, t_fractal *frac);
-void			julia(t_fractal *frac, float cr, float ci);
-void			cubic_julia(t_fractal *frac, float cr, float ci);
 int				mouse_hook(int button, int x, int y, t_fractal *frac);
 void			fractal_iteration(int type, t_imaginary *old, t_imaginary *next, t_imaginary *c);
 void			start_conditions(t_fractal *frac, t_imaginary *c, t_imaginary *next, float x, float y);
