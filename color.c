@@ -3,29 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kaidrumm <kaidrumm@student.42.us>          +#+  +:+       +#+        */
+/*   By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 19:59:36 by KaiDrumm          #+#    #+#             */
-/*   Updated: 2017/04/18 22:26:40 by kaidrumm         ###   ########.us       */
+/*   Created: 2017/03/28 19:59:36 by kdrumm            #+#    #+#             */
+/*   Updated: 2017/04/18 22:26:40 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_triple	*color(float i)
+int		color(float i, t_fractal *frac)
 {
-	t_triple	*rgb;
+	t_triple	rgb;
+	float		fraction;
 
-	if (!(rgb = (t_triple *)malloc(sizeof(*rgb))))
-		ft_error("Malloc error in color\n");
-	rgb->a = sinf(i);
-	rgb->b = cosf(i);
-	rgb->c = -cosf(i);
-	rgb->a += 1;
-	rgb->b += 1;
-	rgb->c += 1;
-	rgb->a *= 127;
-	rgb->b *= 127;
-	rgb->c *= 127;
-	return (rgb);
+	fraction = i / (float)frac->maxIter;
+	if (frac->color_mode == 0)
+	{
+		rgb.a = sinf(i);
+		rgb.b = cosf(i);
+		rgb.c = -cosf(i);
+	}
+	else if (frac->color_mode == 1)
+	{
+		rgb.a = sinf(fraction * M_PI - M_PI_2 + frac->color_offset);
+		rgb.b = sinf(fraction * M_PI * 2 - M_PI_2 + frac->color_offset);
+		rgb.c = sinf(fraction * M_PI * 4 - M_PI_2 + frac->color_offset);
+	}
+	rgb.a += 1;
+	rgb.b += 1;
+	rgb.c += 1;
+	rgb.a *= 127;
+	rgb.b *= 127;
+	rgb.c *= 127;
+	return (((int)round(rgb.a) * 0x10000) + ((int)round(rgb.b) * 0x100)
+		+ (int)round(rgb.c));
 }

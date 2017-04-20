@@ -24,9 +24,25 @@ int			loop(t_fractal *frac)
 	expose_hook(frac);
 	mlx_key_hook(frac->map->window, key_hook, frac);
 	mlx_mouse_hook(frac->map->window, mouse_hook, frac);
-	if (type == 2 || type == 4)
+	if (frac->type == 2 || frac->type == 4)
 		mlx_hook(frac->map->window, 6, 0, mouse_move, frac);
 	mlx_loop(frac->map->connection);
+	return (0);
+}
+
+static char	*set_name(int type)
+{
+	if (type == 1)
+		return ("Mandelbrot");
+	else if (type == 2)
+		return ("Julia");
+	else if (type == 3)
+		return ("Cubic Mandelbrot");
+	else if (type == 4)
+		return ("Cubic Julia");
+	else if (type == 5)
+		return ("Burningship");
+	return ("");
 }
 
 /*
@@ -35,21 +51,33 @@ int			loop(t_fractal *frac)
 
 int			main(int ac, char **av)
 {
-	t_fractal	*frac;
+	t_fractal	frac;
 	int			type;
 	int			i;
+	int			fork_id;
 
 	if (ac < 2)
 		usage();
 	i = 1;
 	while (av[i])
 	{
-		type = atoi(av[i]);
-		if (type < 1 || type > 5)
-			usage();
-		frac = init_fractal(type);
-		loop(frac);
-		i++;
+		fork_id = fork();
+		if (fork_id == 0)
+		{
+			type = atoi(av[i]);
+			if (type < 1 || type > 5)
+				usage();
+			init_fractal(&frac, type);
+			frac.map = init_map(800, 800, set_name(type));
+			loop(&frac);
+			return (0);
+		}
+		else if (fork_id == -1)
+			ft_error("Error spawning windows\n");
+		else
+			i++;
 	}
+	while (i-- > 0)
+		wait(NULL);
 	return (0);
 }

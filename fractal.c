@@ -12,50 +12,57 @@
 
 #include "fractol.h"
 
-// void	draw(t_fractal *frac)
-// {
-// 	expose_hook(frac);
-// }
-
 /*
 ** This takes care of the actual math which, when repeated, determines if a
 ** point lies inside or outside of the fractal set.
 */
 
-void	fractal_iteration(int type, t_imaginary *old, t_imaginary *next,
-	t_imaginary *c)
+t_imaginary	fractal_iteration(int type, t_imaginary old, t_imaginary sq, 
+	t_imaginary c)
 {
+	t_imaginary abs;
+	t_imaginary next;
+	t_imaginary cube;
+
+	next.r = 0;
 	if (type == 1 || type == 2)
 	{
-		update_inum(old, next->r, next->i);
-		update_inum(next, pow(old->r, 2) - pow(old->i, 2) + c->r,
-			(2 * old->r * old->i) + c->i);
+		next.r = sq.r - sq.i + c.r;
+		next.i = 2 * old.r * old.i + c.i;
 	}
 	else if (type == 3 || type == 4)
 	{
-		update_inum(old, next->r, next->i);
-		update_inum(next, pow(old->r, 3) - 3 * old->r * pow(old->i, 2) + c->r,
-			c->i + 3 * pow(old->r, 2) * old->i - pow (old->i, 3));
+		cube.r = pow(old.r, 3);
+		cube.i = pow(old.i, 3);
+		next.r = cube.r - 3 * old.r * sq.i + c.r;
+		next.i = c.i + 3 * sq.r * old.i - cube.i;
 	}
+	else if (type == 5)
+	{
+		abs.r = fabsf(old.r);
+		abs.i = fabsf(old.i);
+		next.r = sq.r - sq.i + c.r;
+		next.i = 2 * abs.i * abs.r + c.i;	
+	}
+	return (next);
 }
-
-/*
-** This sets the inital calculation values where they differ between
-** Mandelbrot and Julia sets.
-*/
 
 void		start_conditions(t_fractal *frac, t_imaginary *c,
 	t_imaginary *next, float x, float y)
 {
-	if (frac->type == 1 || frac->type == 3)
+	if (frac->type == 1 || frac->type == 3 || frac->type == 5)
 	{
-		update_inum(c, x, y);
-		update_inum(next, 0, 0);
+		c->r = x;
+		c->i = y;
+		next->r = 0;
+		next->i = 0;
 	}
 	else if (frac->type == 2 || frac->type == 4)
 	{
-		update_inum(c, frac->c.r, frac->c.i);
-		update_inum(next, x, y);
+		c->r = frac->c.r;
+		c->i = frac->c.i;
+		next->r = x;
+		next->i = y;
 	}
 }
 
@@ -69,39 +76,38 @@ int			fractal(void *p, float x, float y)
 	int			i;
 	t_imaginary c;
 	t_imaginary	next;
-	t_imaginary	old;
+	t_imaginary	sq;
 
 	frac = (t_fractal *)p;
 	start_conditions(frac, &c, &next, x, y);
 	i = 0;
 	while (i < frac->maxIter)
 	{
-		if ((next.r * next.r) + (next.i * next.i) > 4)
+		sq.r = next.r * next.r;
+		sq.i = next.i * next.i;
+		if (sq.r + sq.i > 4)
 		{
 			draw_pixel(frac->map, scale2window_x(frac, x),
-				scale2window_y(frac, y), rgbtoi(color(i)));
+				scale2window_y(frac, y), color(i, frac));
 			return (1);
 		}
-		fractal_iteration(frac->type, &old, &next, &c);
+		next = fractal_iteration(frac->type, next, sq, c);
 		i++;
 	}
 	draw_pixel(frac->map, x, y, 0x000000);
 	return (1);
 }
 
-t_fractal	*init_fractal(int type)
+void		init_fractal(t_fractal *frac, int type)
 {
-	t_fractal	*frac;
-
-	if (!(frac = (t_fractal *)malloc(sizeof(t_fractal))))
-		ft_error("Malloc failure initializing fractal");
-	frac->map = init_map(800, 800, "Fractal");
-	frac->maxIter = 20;
+	frac->maxIter = 42;
 	frac->x_offset = -2;
 	frac->y_offset = -2;
 	frac->width = 4;
 	frac->height = 4;
 	frac->zoom = 1;
 	frac->type = type;
-	return (frac);
+	frac->color_mode = 0;
+	frac->color_offset = 0;
+	frac->freeze = 0;
 }
