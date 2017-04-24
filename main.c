@@ -14,9 +14,10 @@
 
 void		usage(void)
 {
-	ft_error("Usage: ./fractol f where f=1 for Mandelbrot, f=2 for Julia, \
-		f=3 for cubic mandelbrot, f=4 for cubic Julia, and f=5 for \
-		Burningship.\n");
+	ft_putstr("Usage: ./fractol [f] where f=1 for Mandelbrot, f=2 for Julia, ");
+	ft_putstr("f=3 for cubic mandelbrot, f=4 for cubic Julia, and f=5 for ");
+	ft_putstr("Burningship.\n");
+	exit(0);
 }
 
 int			loop(t_fractal *frac)
