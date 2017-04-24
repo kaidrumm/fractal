@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdrumm <kdrumm@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/20 12:44:47 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/20 12:46:28 by kdrumm           ###   ########.us       */
+/*   Updated: 2017/04/24 12:13:30 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** This can be used to apply any function to every pixel or dot on the map.
 */
 
-void	iteratePoints(t_map *map, int (*f)(void	*p, int i, int j), void *p)
+void	iterate_points(t_map *map, int (*f)(void	*p, int i, int j), void *p)
 {
 	int		i;
 	int		j;
@@ -47,7 +47,8 @@ t_map	*init_map(int w, int h, char *title)
 	map->width = w;
 	map->height = h;
 	map->connection = mlx_init();
-	map->window = mlx_new_window(map->connection, map->width, map->height, title);
+	map->window = mlx_new_window(map->connection, map->width, map->height,
+		title);
 	map->image = mlx_new_image(map->connection, map->width, map->height);
 	map->address = mlx_get_data_addr(map->image, &(map->bits_per_pixel),
 		&(map->bytes_per_line), &(map->endian));

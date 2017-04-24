@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdrumm <kdrumm@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/20 12:44:47 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/20 12:46:25 by kdrumm           ###   ########.us       */
+/*   Created: 2017/04/20 14:20:05 by kdrumm            #+#    #+#             */
+/*   Updated: 2017/04/24 11:51:19 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void		usage()
+void		usage(void)
 {
 	ft_error("Usage: ./fractol f where f=1 for Mandelbrot, f=2 for Julia, \
 		f=3 for cubic mandelbrot, f=4 for cubic Julia, and f=5 for \
@@ -45,6 +45,19 @@ static char	*set_name(int type)
 	return ("");
 }
 
+static int	child_actions(t_fractal *frac, char *av)
+{
+	int		type;
+
+	type = atoi(av);
+	if (type < 1 || type > 5)
+		usage();
+	init_fractal(frac, type);
+	frac->map = init_map(800, 800, set_name(type));
+	loop(frac);
+	return (0);
+}
+
 /*
 ** Call init_map and then fractol types depending on input parameter
 */
@@ -52,7 +65,6 @@ static char	*set_name(int type)
 int			main(int ac, char **av)
 {
 	t_fractal	frac;
-	int			type;
 	int			i;
 	int			fork_id;
 
@@ -63,15 +75,7 @@ int			main(int ac, char **av)
 	{
 		fork_id = fork();
 		if (fork_id == 0)
-		{
-			type = atoi(av[i]);
-			if (type < 1 || type > 5)
-				usage();
-			init_fractal(&frac, type);
-			frac.map = init_map(800, 800, set_name(type));
-			loop(&frac);
-			return (0);
-		}
+			return (child_actions(&frac, av[i]));
 		else if (fork_id == -1)
 			ft_error("Error spawning windows\n");
 		else

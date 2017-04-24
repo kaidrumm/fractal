@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hsv_rgb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdrumm <kdrumm@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 16:03:35 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/20 12:46:27 by kdrumm           ###   ########.us       */
+/*   Updated: 2017/04/24 12:16:56 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** and translates them into a hexcode for that color (with no opacity).
 */
 
-int		rgbtoi(t_triple *rgb)
+int			rgbtoi(t_triple *rgb)
 {
 	int		r;
 	int		b;
@@ -32,7 +32,6 @@ int		rgbtoi(t_triple *rgb)
 		g = (int)round(rgb->b * 255);
 		b = (int)round(rgb->c * 255);
 	}
-	//printf("Int color is %x\n", (r * 0x10000) + (g * 0x100) + b);
 	return ((r * 0x10000) + (g * 0x100) + b);
 }
 
@@ -52,6 +51,35 @@ int			check_hsv(t_triple *hsv)
 	return (0);
 }
 
+static void	hsv_rgb_helper(t_triple *hsv, t_triple *rgb)
+{
+	int			sextant;
+	t_triple	cmy;
+	float		fract;
+
+	if (hsv->a == 360)
+		hsv->a = 0;
+	else
+		hsv->a = hsv->a / 60;
+	sextant = floor(hsv->a);
+	fract = hsv->a - sextant;
+	update_triple(&cmy, hsv->c * (1 - hsv->b), hsv->c * (1 - (hsv->b *
+		fract)),
+		hsv->c * (1 - (hsv->b * (1 - fract))));
+	if (sextant == 0)
+		update_triple(rgb, hsv->c, cmy.c, cmy.a);
+	else if (sextant == 1)
+		update_triple(rgb, cmy.b, hsv->c, cmy.a);
+	else if (sextant == 2)
+		update_triple(rgb, cmy.a, hsv->c, cmy.c);
+	else if (sextant == 3)
+		update_triple(rgb, cmy.a, cmy.b, hsv->c);
+	else if (sextant == 4)
+		update_triple(rgb, cmy.c, cmy.a, hsv->c);
+	else
+		update_triple(rgb, hsv->c, cmy.a, cmy.b);
+}
+
 /*
 ** Expects S and V between 0 and 1, H as an angle in degrees
 */
@@ -59,9 +87,6 @@ int			check_hsv(t_triple *hsv)
 t_triple	*hsv2rgb(t_triple *hsv)
 {
 	t_triple	*rgb;
-	float		fract;
-	t_triple	cmy;
-	int			sextant;
 
 	check_hsv(hsv);
 	if (!(rgb = (t_triple *)malloc(sizeof(*rgb))))
@@ -69,64 +94,6 @@ t_triple	*hsv2rgb(t_triple *hsv)
 	if (hsv->b == 0 && hsv->a == -1)
 		update_triple(rgb, hsv->c, hsv->c, hsv->c);
 	else
-	{
-		if (hsv->a == 360)
-			hsv->a = 0;
-		else
-			hsv->a = hsv->a / 60;
-		sextant = floor(hsv->a);
-		fract = hsv->a - sextant;
-		update_triple(&cmy, hsv->c * (1 - hsv->b), hsv->c * (1 - (hsv->b * fract)),
-			hsv->c * (1 - (hsv->b * (1 - fract))));
-		if (sextant == 0)
-			update_triple(rgb, hsv->c, cmy.c, cmy.a);
-		else if (sextant == 1)
-			update_triple(rgb, cmy.b, hsv->c, cmy.a);
-		else if (sextant == 2)
-			update_triple(rgb, cmy.a, hsv->c, cmy.c);
-		else if (sextant == 3)
-			update_triple(rgb, cmy.a, cmy.b, hsv->c);
-		else if (sextant == 4)
-			update_triple(rgb, cmy.c, cmy.a, hsv->c);
-		else
-			update_triple(rgb, hsv->c, cmy.a, cmy.b);
-	}
+		hsv_rgb_helper(hsv, rgb);
 	return (rgb);
 }
-
-/*
-** Expects RGB values as percentages between 0 and 1
-*/
-
-// t_triple	*rgb2hsv(t_triple *rgb)
-// {
-// 	t_triple	*hsv;
-// 	float		max;
-// 	float		min;
-
-// 	check_rgb_fraction(rgb);
-// 	if (!(hsv = (t_triple *)malloc(sizeof(*hsv))))
-// 		ft_error("Malloc error");
-// 	max = maximum_floats(3, rgb->a, rgb->c, rgb->c);
-// 	min = minimum_floats(3, rgb->a, rgb->c, rgb->c);
-// 	hsv->c = max;
-// 	if (max == 0)
-// 		hsv->b = 0;
-// 	else
-// 		hsv->b = (max - min) / max;
-// 	if (hsv->b == 0)
-// 		hsv->a = -1;
-// 	else
-// 	{
-// 		if (rgb->a == max)
-// 			hsv->a = (rgb->c - rgb->c) / (max - min);
-// 		else if (rgb->b == max)
-// 			hsv->a = 2 + (rgb->c - rgb->a) / (max - min);
-// 		else
-// 			hsv->a = 4 + (rgb->a - rgb->c) / (max - min);
-// 		hsv->a = 60 * hsv->a;
-// 		if (hsv->a < 0)
-// 			hsv->a = hsv->a + 360;
-// 	}
-// 	return (hsv);
-// }

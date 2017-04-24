@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdrumm <kdrumm@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/20 12:44:47 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/20 12:46:24 by kdrumm           ###   ########.us       */
+/*   Created: 2017/04/20 14:20:05 by kdrumm            #+#    #+#             */
+/*   Updated: 2017/04/24 12:09:32 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 typedef struct	s_fractal
 {
-	int			maxIter;
+	int			max_iter;
 	int			type;
 	float		width;
 	float		height;
@@ -55,7 +55,9 @@ int				scale2window_y(t_fractal *frac, float y);
 void			translate(float delta_x, float delta_y);
 int				mouse_move(int x, int y, t_fractal *frac);
 int				mouse_hook(int button, int x, int y, t_fractal *frac);
-t_imaginary		fractal_iteration(int type, t_imaginary old, t_imaginary sq, t_imaginary c);
-void			start_conditions(t_fractal *frac, t_imaginary *c, t_imaginary *next, float x, float y);
+t_imaginary		fractal_iteration(int type, t_imaginary old, t_imaginary sq,
+	t_imaginary c);
+void			start_conditions(t_fractal *frac, t_imaginary *next,
+	float x, float y);
 
 #endif

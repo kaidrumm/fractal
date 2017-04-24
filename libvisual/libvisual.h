@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libvisual.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdrumm <kdrumm@student.42.us.org>          +#+  +:+       +#+        */
+/*   By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/17 16:03:35 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/20 12:46:27 by kdrumm           ###   ########.us       */
+/*   Updated: 2017/04/24 12:17:54 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			draw_pixel(t_map *map, int x, int y, int color);
 t_map			*init_map(int w, int h, char *title);
 void			update_triple(t_triple *abc, float x, float y, float z);
 int				check_range(float value, float min, float max, char *msg);
-void			iteratePoints(t_map *map, int (*f)(void	*p, int i, int j), void *p);
+void			iterate_points(t_map *map, int (*f)(void *p, int i, int j),
+	void *p);
 
 #endif

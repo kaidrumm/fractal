@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Kai <kdrumm@student.42.us.org>             +#+  +:+       +#+        */
+/*   By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 13:47:52 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/03 20:38:38 by KaiDrumm         ###   ########.us       */
+/*   Updated: 2017/04/24 12:19:21 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 # define MALLOC_GUARD(x) if(!x) return (0);
 # define ABS(x) ((x) < 0) ? -(x) : (x)
 # define MAX(a, b) (a >= b) ? a : b
+
+typedef struct	s_intpt
+{
+	int			x;
+	int			y;
+}				t_intpt;
+
+typedef struct	s_fltpt
+{
+	float		x;
+	float		y;
+}				t_fltpt;
 
 /*
 ** Memory Functions
@@ -88,7 +100,7 @@ int				ft_atoi_base(char *str, int base);
 char			*ft_itoa(int n);
 char			*ft_itoa_base(int n, int base);
 void			ft_swap(int *a, int *b);
-int             get_next_line(const int fd, char **line);
+int				get_next_line(const int fd, char **line);
 
 /*
 ** Printout
@@ -131,6 +143,5 @@ t_list			*ft_lstsort(t_list *lst, int (*cmp)(void *, void *));
 */
 double			maximum_doubles(int n, ...);
 double			minimum_doubles(int n, ...);
-
 
 #endif

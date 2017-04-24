@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/28 19:59:36 by kdrumm            #+#    #+#             */
-/*   Updated: 2017/04/18 22:26:40 by kdrumm           ###   ########.us       */
+/*   Created: 2017/04/20 14:20:05 by kdrumm            #+#    #+#             */
+/*   Updated: 2017/04/24 11:38:22 by kdrumm           ###   ########.us       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		color(float i, t_fractal *frac)
 	t_triple	rgb;
 	float		fraction;
 
-	fraction = i / (float)frac->maxIter;
+	fraction = i / (float)frac->max_iter;
 	if (frac->color_mode == 0)
 	{
 		rgb.a = sinf(i);

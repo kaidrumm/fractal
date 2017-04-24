@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kdrumm <kdrumm@student.42.us.org>          +#+  +:+       +#+         #
+#    By: kdrumm <kdrumm@student.42.us>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/20 12:44:47 by kdrumm            #+#    #+#              #
-#    Updated: 2017/04/20 12:46:25 by kdrumm           ###   ########.us        #
+#    Updated: 2017/04/24 12:20:10 by kdrumm           ###   ########.us        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ clean:
 	rm -f *.o
 
 fclean: clean
+	cd libft && make fclean
+	cd libvisual && make fclean
 	rm -f $(NAME)
 
 re: fclean all
